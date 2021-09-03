@@ -53,3 +53,28 @@ const migration = newMigration({
   authToken: process.env.GRAPHCMS_TOKEN,
 });
 ```
+
+## GitHub Workflow
+
+```yml
+name: GraphCMS Migrations
+on:
+  push:
+    branches:
+      - main
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          check-latest: true
+
+      - name: Push schema
+        run: npx graphcms-migrate graphcms-migrations
+        env:
+          GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
+          GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
+```

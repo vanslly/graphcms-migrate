@@ -42,13 +42,13 @@ const migrate = async (directory = "graphcms-migrations", options) => {
     process.exit();
   }
 
-  spinner.succeed = `Detected ${migrationCount} pending migrations`;
+  spinner.succeed(`Detected ${migrationCount} pending migrations`);
 
   if (dryRun) {
     console.log("Dry mode enabled");
   }
 
-  const migrationsSpinner = ora("Running migrations").start();
+  spinner.start("Running migrations");
 
   for (const fileName of migrationsToRun) {
     await runMigration({
@@ -62,9 +62,9 @@ const migrate = async (directory = "graphcms-migrations", options) => {
   }
 
   if (!dryRun) {
-    migrationsSpinner.succeed(`Schema migration completed successfully`);
+    spinner.succeed(`Schema migration completed successfully`);
   } else {
-    migrationsSpinner.info(`Dry run completed successfully`);
+    spinner.info(`Dry run completed successfully`);
   }
 };
 

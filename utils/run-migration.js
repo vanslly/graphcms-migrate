@@ -20,6 +20,7 @@ const runMigration = async ({
     if (dryRun) {
       const changes = await migration.dryRun();
       spinner.info(`Changes will be accepted when not in dry run ${fileName}`);
+      console.log(changes);
     }
 
     const { errors, name, id, status } = await migration.run(true);
