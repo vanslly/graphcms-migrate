@@ -1,4 +1,4 @@
-# `npx graphcms-migrate`
+# `npx graphcms-migrate`
 
 EXPERIMENTAL
 
